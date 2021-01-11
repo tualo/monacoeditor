@@ -1,9 +1,9 @@
 Ext.define('Tualo.monacoeditor.form.field.Code', {    
-    extend: 'Ext.field.Field',
+    extend: 'Ext.field.Input',
 
     alias: "widget.tualocode",
     language: null,
-
+    minHeight: 250,
     isInputField: true,
  
     /**
@@ -12,42 +12,25 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
      * property on their class body.  Not intended for instance-level use.
      * @protected
      */
-    tag: 'div',
+    //tag: 'div',
+
+    inputType: 'hidden',
+    hidden: false,
  
-    config: {
-        /**
-         * @cfg {String} [inputType='text'] The type attribute for input fields -- e.g. text,
-         * password, date, url, email, etc.
-         */
-        inputType: {
-            cached: true,
-            $value: 'text'
-        },
  
-        /**
-         * @cfg {Boolean} [readOnly=false]
-         * `true` to set the field DOM element `readonly` attribute to `"true"`.
-         *
-         * Mutation of {@link Ext.field.Text text fields} through triggers is also disabled.
-         *
-         * To simply prevent typing into the field while still allowing mutation through
-         * triggers, set {@link Ext.field.Text#cfg!editable} to `false`.
-         * @accessor
-         */
-        readOnly: false,
- 
-        /**
-         * @private
-         */
-        inputValue: null 
-    },
- 
-    focusEl: 'inputElement',
-    ariaEl: 'inputElement',
+    focusEl: 'editorElement',
+    ariaEl: 'editorElement',
     inputTabIndex: 0,
  
     getBodyTemplate: function() {
-        return [this.getInputTemplate()];
+        return [
+            this.getInputTemplate(),
+            {
+                tag: 'div',
+                reference: 'editorElement',
+                tabindex: this.inputTabIndex,
+            }
+        ];
     },
  
     getInputTemplate: function() {
@@ -70,14 +53,7 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
         this.labelElement.dom.setAttribute('for', this.inputElement.id);
     },
 
-    getInputTemplate: function() {
-        return {
-            tag: this.tag,
-            reference: 'inputElement',
-            tabindex: this.inputTabIndex,
-            cls: Ext.baseCSSPrefix + 'input-el'
-        };
-    },
+   
     resizeMonacoEditor: function(el,width,height){
         if ((typeof this.monacoeditor=='object')&&(typeof this.monacoeditor.layout=='function')){
             if (typeof this.resizeMonacoEditorTimer!='undefined')  Ext.undefer(this.resizeMonacoEditorTimer);
@@ -90,9 +66,10 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
         }
     },
     createEditor: function(){
-        //console.log('createEditor',this.monacoeditor);
+        console.log('createEditor',this.monacoeditor,this.inputElement,this.editorElement);
+
         if(typeof this.monacoeditor=='undefined')
-        this.monacoeditor = monaco.editor.create(  document.getElementById(this.inputElement.dom.id)  , {
+        this.monacoeditor = monaco.editor.create(  document.getElementById(this.editorElement.dom.id)  , {
             language: this.language,
             automaticLayout: false,
             //roundedSelection: false,
@@ -124,15 +101,32 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
         });
         this.monacoeditor.layout();
 
-        this.monacoeditor.getModel().onDidChangeContent((event) => { this._value  = this.monacoeditor.getValue(); });
+        this.monacoeditor.getModel().onDidChangeContent((event) => { 
+            /*
+            console.log(this.inputValue);
+            this.updateValue( this.monacoeditor.getValue(), this._value ); 
+            this._value  = this.monacoeditor.getValue(); 
+            */
+           
 
+            this.setValue( this.monacoeditor.getValue() ); 
+        });
     },
     updateDisabled: function(disabled, oldDisabled) {
         this.callParent([disabled, oldDisabled]);
- 
-        this.inputElement.dom.disabled = !!disabled;
+ //       this.inputElement.dom.disabled = !!disabled;
     },
  
+    updateValue: function(value, oldValue) {
+        // This is to prevent formatting from updating the current
+        // value while typing
+        this.callParent([value, oldValue]);
+        if (typeof this.monacoeditor!='undefined'){
+            this.monacoeditor.setValue(value);
+        }
+    },
+
+    /*
     updateInputType: function(newInputType) {
         this.setInputAttribute('type', newInputType);
     },
@@ -147,15 +141,7 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
         this.setInputAttribute('readonly', readOnly ? true : null);
     },
  
-    updateValue: function(value, oldValue) {
-        // This is to prevent formatting from updating the current
-        // value while typing
-        if (this.canSetInputValue()) {
-            this.setInputValue(value);
-        }
- 
-        this.callParent([value, oldValue]);
-    },
+
  
     applyInputValue: function(value) {
         return (value != null) ? (value + '') : '';
@@ -202,10 +188,6 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
             return true;
         },
  
-        /**
-         * Helper method to update or remove an attribute on the `inputElement`
-         * @private
-         */
         setInputAttribute: function(attribute, newValue) {
             var inputElement = this.inputElement.dom;
  
@@ -217,7 +199,7 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
             }
         }
     },
-
+    */
 });
 
 
