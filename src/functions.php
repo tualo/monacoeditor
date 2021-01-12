@@ -1,5 +1,5 @@
 <?php
 
-if (class_exists("tualo\Office\MonacoEditor\Middlewares\Middleware")){ }
-if (class_exists("tualo\Office\MonacoEditor\Routes\Route")){ }
+if (class_exists("Tualo\Office\MonacoEditor\Middlewares\Middleware")){ }
+if (class_exists("Tualo\Office\MonacoEditor\Routes\Route")){ }
 

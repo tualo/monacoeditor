@@ -66,7 +66,6 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
         }
     },
     createEditor: function(){
-        console.log('createEditor',this.monacoeditor,this.inputElement,this.editorElement);
 
         if(typeof this.monacoeditor=='undefined')
         this.monacoeditor = monaco.editor.create(  document.getElementById(this.editorElement.dom.id)  , {
@@ -108,9 +107,12 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
             this._value  = this.monacoeditor.getValue(); 
             */
            
-
+            //this._value = this.monacoeditor.getValue();
+            
             this.setValue( this.monacoeditor.getValue() ); 
+            try{ this.$bindings.value.setValue( this.monacoeditor.getValue() );} catch(e){}
         });
+        window.input = this;
     },
     updateDisabled: function(disabled, oldDisabled) {
         this.callParent([disabled, oldDisabled]);
@@ -120,10 +122,12 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
     updateValue: function(value, oldValue) {
         // This is to prevent formatting from updating the current
         // value while typing
-        this.callParent([value, oldValue]);
+
         if (typeof this.monacoeditor!='undefined'){
             this.monacoeditor.setValue(value);
         }
+        this.callParent([value, oldValue]);
+        
     },
 
     /*

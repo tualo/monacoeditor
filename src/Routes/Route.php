@@ -1,8 +1,8 @@
 <?php
-namespace tualo\Office\MonacoEditor\Routes;
-use tualo\Office\Basic\TualoApplication;
-use tualo\Office\Basic\Route As R;
-use tualo\Office\Basic\IRoute;
+namespace Tualo\Office\MonacoEditor\Routes;
+use Tualo\Office\Basic\TualoApplication;
+use Tualo\Office\Basic\Route As R;
+use Tualo\Office\Basic\IRoute;
 
 
 class Route implements IRoute{

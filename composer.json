@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "tualo\\Office\\MonacoEditor\\": "src/"
+            "Tualo\\Office\\MonacoEditor\\": "src/"
         },
         "files": ["src/functions.php"]
     },

@@ -1,8 +1,8 @@
 <?php
 
-namespace tualo\Office\MonacoEditor\Middleware;
-use tualo\Office\Basic\TualoApplication;
-use tualo\Office\Basic\IMiddleware;
+namespace Tualo\Office\MonacoEditor\Middlewares;
+use Tualo\Office\Basic\TualoApplication;
+use Tualo\Office\Basic\IMiddleware;
 
 class Middleware implements IMiddleware{
     public static function register(){
