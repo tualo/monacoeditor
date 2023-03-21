@@ -1,6 +1,6 @@
 Ext.define('Tualo.monacoeditor.form.field.Code', {    
+    //extend: 'Ext.form.field.Base',// 
     extend: 'Ext.field.Input',
-
     alias: "widget.tualocode",
     language: null,
     minHeight: 250,
