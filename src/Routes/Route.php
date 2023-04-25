@@ -10,6 +10,8 @@ class Route implements IRoute{
 
         
         R::add('/monacoeditorlib/(?P<file>[\/.\w\d\-]+)',function($matches){
+
+
             if (file_exists(dirname(__DIR__,2).'/lib/'.$matches['file'].'')){
                 $path_parts = pathinfo(dirname(__DIR__,2).'/lib/'.$matches['file'].'');
                 if ($path_parts['extension']=='js')   TualoApplication::contenttype('application/javascript');
