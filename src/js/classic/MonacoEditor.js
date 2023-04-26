@@ -44,7 +44,7 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
     createEditor: function(){
         let o = {
             width: this.getWidth() - this.labelWidth - 17,
-            height: this.getHeight()
+            height: this.getHeight() - 2
         };
         
         if(typeof this.monacoeditor=='undefined'){
@@ -94,10 +94,14 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
             if (typeof this.resizeMonacoEditorTimer!='undefined')  Ext.undefer(this.resizeMonacoEditorTimer);
             this.resizeMonacoEditorTimer = Ext.defer(function(o){
                 this.monacoeditor.layout(o);
+            },10,this,[{}])
+
+            Ext.defer(function(o){
+                this.monacoeditor.layout(o);
             },100,this,[{
-                // width: this.getWidth()  - this.labelWidth - 28,
-                height: this.getHeight()
+                height: this.getHeight() - 2
             }])
+
         }
     },
     onDidChangeContent: function(event){
