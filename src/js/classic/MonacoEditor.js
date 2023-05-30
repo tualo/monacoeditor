@@ -29,6 +29,7 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
       var me = this;
       me.callParent();
       window.mEditor = this;
+      
     },
   
     afterRender: function () {
@@ -93,13 +94,16 @@ Ext.define('Tualo.monacoeditor.form.field.Code', {
         if ((typeof this.monacoeditor=='object')&&(typeof this.monacoeditor.layout=='function')){
             if (typeof this.resizeMonacoEditorTimer!='undefined')  Ext.undefer(this.resizeMonacoEditorTimer);
             this.resizeMonacoEditorTimer = Ext.defer(function(o){
+                console.log('resizeMonacoEditor 1',o);
                 this.monacoeditor.layout(o);
-            },10,this,[{}])
+            },100,this,[{}])
 
             Ext.defer(function(o){
+                console.log('resizeMonacoEditor 2',o);
                 this.monacoeditor.layout(o);
-            },100,this,[{
-                height: this.getHeight() - 2
+            },300,this,[{
+                height: this.getHeight() - 2,
+                width: this.getWidth() - this.labelWidth - 17
             }])
 
         }
@@ -130,6 +134,7 @@ Ext.define('Tualo.monacoeditor.form.field.CodeSql', {
     alias: "widget.tualocodesql",
     language: "mysql",
 });
+
 Ext.define('Tualo.monacoeditor.form.field.CodeJade', {    
     extend: 'Tualo.monacoeditor.form.field.Code',
     alias: "widget.tualocodejade",
