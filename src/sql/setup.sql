@@ -175,3 +175,104 @@ values
     vendor =
 values
 (vendor);
+
+
+
+
+insert into
+    extjs_base_types (
+        id,
+        classname,
+        baseclass,
+        xtype_long_modern,
+        xtype_long_classic,
+        name,
+        vendor
+    )
+values
+    (
+        'Tualo.monacoeditor.form.field.CodeHtml (widget.tualocodehtml)',
+        'Tualo.monacoeditor.form.field.CodeHtml',
+        'Tualo.monacoeditor.form.field.Code',
+        'widget.tualocodehtml',
+        'widget.tualocodehtml',
+        'Tualo.monacoeditor.form.field.CodeHtml',
+        'tualo solutions GmbH'
+    ) on duplicate key
+update
+    xtype_long_modern =
+values
+(xtype_long_modern),
+    xtype_long_classic =
+values
+(xtype_long_classic);
+
+
+
+
+insert into
+    extjs_base_types (
+        id,
+        classname,
+        baseclass,
+        xtype_long_modern,
+        xtype_long_classic,
+        name,
+        vendor
+    )
+values
+    (
+        'Tualo.monacoeditor.form.field.CodeScss (widget.tualocodescss)',
+        'Tualo.monacoeditor.form.field.CodeScss',
+        'Tualo.monacoeditor.form.field.Code',
+        'widget.tualocodescss',
+        'widget.tualocodescss',
+        'Tualo.monacoeditor.form.field.CodeScss',
+        'tualo solutions GmbH'
+    ) on duplicate key
+update
+    xtype_long_modern =
+values
+(xtype_long_modern),
+    xtype_long_classic =
+values
+(xtype_long_classic);
+
+
+
+insert
+    ignore into custom_types (
+        vendor,
+        name,
+        id,
+        xtype_long_classic,
+        extendsxtype_classic,
+        xtype_long_modern,
+        extendsxtype_modern
+    )
+values
+    (
+        "Tualo",
+        "Tualo.monacoeditor.form.field.CodeScss",
+        "Tualo.monacoeditor.form.field.CodeScss",
+        "widget.tualocodescss",
+        "Tualo.monacoeditor.form.field.Code",
+        "widget.textarea",
+        "Ext.field.Text"
+    ) on duplicate key
+update
+    id =
+values
+(id),
+    xtype_long_classic =
+values
+(xtype_long_classic),
+    extendsxtype_classic =
+values
+(extendsxtype_classic),
+    name =
+values
+(name),
+    vendor =
+values
+(vendor);
