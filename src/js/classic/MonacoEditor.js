@@ -162,3 +162,10 @@ Ext.define('Tualo.monacoeditor.form.field.CodeScss', {
     alias: "widget.tualocodescss",
     language: "scss",
 });
+
+
+Ext.define('Tualo.monacoeditor.form.field.CodeJSON', {    
+    extend: 'Tualo.monacoeditor.form.field.Code',
+    alias: "widget.tualocodejson",
+    language: "json",
+});
