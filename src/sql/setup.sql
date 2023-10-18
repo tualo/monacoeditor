@@ -1,4 +1,5 @@
 delimiter ;
+
 insert into
     extjs_base_types (
         id,
