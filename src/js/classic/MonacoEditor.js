@@ -139,7 +139,6 @@ Ext.define('Tualo.monacoeditor.form.field.CodeJade', {
     extend: 'Tualo.monacoeditor.form.field.Code',
     alias: "widget.tualocodejade",
     language: "pug",
-    FileList
 });
 Ext.define('Tualo.monacoeditor.form.field.CodeMarkdown', {    
     extend: 'Tualo.monacoeditor.form.field.Code',
