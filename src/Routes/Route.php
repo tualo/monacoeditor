@@ -18,7 +18,7 @@ class Route implements IRoute
             RouteSecurityHelper::serveSecureStaticFile(
                 $matches['file'],
                 dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'lib',
-                ['js', 'css', 'html', 'svg', 'png', 'woff2', 'woff', 'ttf'],
+                ['js', 'css', 'html', 'svg', 'png', 'woff2', 'woff', 'ttf', 'json', 'map'],
                 [
                     'application/javascript',
                     'application/json',
@@ -31,6 +31,6 @@ class Route implements IRoute
                     'font/ttf'
                 ]
             );
-        },  ['get'], false);
+        }, ['get'], false);
     }
 }
