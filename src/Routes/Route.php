@@ -15,7 +15,7 @@ class Route implements IRoute
 
 
         R::add('/monacoeditorlib/(?P<file>[a-zA-Z0-9\-_\/\.]+)', function ($matches) {
-            RouteSecurityHelper::serveSecureStaticFile(
+            /*RouteSecurityHelper::serveSecureStaticFile(
                 $matches['file'],
                 dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'lib',
                 ['js', 'css', 'html', 'svg', 'png', 'woff2', 'woff', 'ttf', 'json', 'map'],
@@ -31,6 +31,35 @@ class Route implements IRoute
                     'font/ttf'
                 ]
             );
+            */
+            $allowedExtensions = ['js', 'css', 'map'];
+            $file = $matches['file'];
+            if (
+                strpos($file, '..') !== false ||
+                strpos($file, './') !== false ||
+                strpos($file, '\\') !== false
+            ) {
+                http_response_code(404);
+                return;
+            }
+
+            $basePath = realpath(dirname(__DIR__, 2) . '/lib/v0.52.2');
+            $fullPath = $basePath . '/' . $file;
+            if (file_exists($fullPath)) {
+                $path_parts = pathinfo($fullPath);
+                if (in_array($path_parts['extension'], $allowedExtensions)) {
+                    if ($path_parts['extension'] == 'js')   TualoApplication::contenttype('application/javascript');
+                    if ($path_parts['extension'] == 'css')   TualoApplication::contenttype('text/css');
+                    if ($path_parts['extension'] == 'map')   TualoApplication::contenttype('application/json');
+                    TualoApplication::etagFile($fullPath);
+                } else {
+                    http_response_code(404);
+                    TualoApplication::body("Unsupported file type: " . $path_parts['extension']);
+                }
+            } else {
+                http_response_code(404);
+                TualoApplication::body("File not found: " . $fullPath);
+            }
         }, ['get'], false);
     }
 }
