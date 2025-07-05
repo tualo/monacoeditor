@@ -32,7 +32,7 @@ class Route implements IRoute
                 ]
             );
             */
-            $allowedExtensions = ['js', 'css', 'map'];
+            $allowedExtensions = ['js', 'css', 'map', 'ttf', 'woff', 'woff2'];
             $file = $matches['file'];
             if (
                 strpos($file, '..') !== false ||
@@ -48,6 +48,9 @@ class Route implements IRoute
             if (file_exists($fullPath)) {
                 $path_parts = pathinfo($fullPath);
                 if (in_array($path_parts['extension'], $allowedExtensions)) {
+                    if ($path_parts['extension'] == 'ttf') TualoApplication::contenttype('font/ttf');
+                    if ($path_parts['extension'] == 'woff') TualoApplication::contenttype('font/woff');
+                    if ($path_parts['extension'] == 'woff2') TualoApplication::contenttype('font/woff2');
                     if ($path_parts['extension'] == 'js')   TualoApplication::contenttype('application/javascript');
                     if ($path_parts['extension'] == 'css')   TualoApplication::contenttype('text/css');
                     if ($path_parts['extension'] == 'map')   TualoApplication::contenttype('application/json');
