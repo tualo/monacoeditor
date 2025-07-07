@@ -54,13 +54,16 @@ class Route implements IRoute
                     if ($path_parts['extension'] == 'js')   TualoApplication::contenttype('application/javascript');
                     if ($path_parts['extension'] == 'css')   TualoApplication::contenttype('text/css');
                     if ($path_parts['extension'] == 'map')   TualoApplication::contenttype('application/json');
+                    http_response_code(200);
                     TualoApplication::etagFile($fullPath);
                 } else {
                     http_response_code(404);
+                    echo "Unsupported file type: " . $path_parts['extension'];
                     TualoApplication::body("Unsupported file type: " . $path_parts['extension']);
                 }
             } else {
                 http_response_code(404);
+                echo "File not found: " . $fullPath;
                 TualoApplication::body("File not found: " . $fullPath);
             }
         }, ['get'], false);
