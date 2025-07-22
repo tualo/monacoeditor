@@ -1,6 +1,6 @@
 {
   "name": "tualo/monacoeditor",
-  "description": "Dashboard for tualo office",
+  "description": "monacoeditor controll for tualo office",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -19,5 +19,5 @@
   },
   "minimum-stability": "dev",
   "require": {},
-  "version": "1.1.2"
+  "version": "1.1.3"
 }
