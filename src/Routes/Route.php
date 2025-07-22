@@ -66,6 +66,6 @@ class Route implements IRoute
                 echo "File not found: " . $fullPath;
                 TualoApplication::body("File not found: " . $fullPath);
             }
-        }, ['get'], false);
+        }, ['get'], true);
     }
 }
