@@ -11,9 +11,11 @@ class Middleware implements IMiddleware
     {
         TualoApplication::use('monacoeditor', function () {
             try {
+                TualoApplication::javascript('monacoeditor_loader', './monacoeditorlib/dist/app.bundle.js', [], -10000);
 
-                TualoApplication::javascript('monacoeditor_loader', './monacoeditorlib/min/vs/loader.js', [], -10000);
-                TualoApplication::javascript('monacoeditor_require', './monacoeditorlib/require.js', [], -500);
+                //TualoApplication::javascript('monacoeditor_loader', './monacoeditorlib/min/vs/loader.js', [], -10000);
+
+                //TualoApplication::javascript('monacoeditor_require', './monacoeditorlib/require.js', [], -500);
 
                 // TualoApplication::module('monacoeditor_loader','./monacoeditorlib/esm/metadata.js',[],-10000);
 
