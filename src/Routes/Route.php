@@ -8,7 +8,7 @@ use Tualo\Office\Basic\Route as R;
 use Tualo\Office\Basic\IRoute;
 
 
-class Route implements IRoute
+class Route extends \Tualo\Office\Basic\RouteWrapper
 {
     public static function register()
     {
