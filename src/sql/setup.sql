@@ -356,3 +356,34 @@ values
     vendor =
 values
 (vendor);
+
+
+
+
+insert into
+    extjs_base_types (
+        id,
+        classname,
+        baseclass,
+        xtype_long_modern,
+        xtype_long_classic,
+        name,
+        vendor
+    )
+values
+    (
+        'Tualo.monacoeditor.form.field.CodePhp (widget.tualocodephp)',
+        'Tualo.monacoeditor.form.field.CodePhp',
+        'Tualo.monacoeditor.form.field.Code',
+        'widget.tualocodephp',
+        'widget.tualocodephp',
+        'Tualo.monacoeditor.form.field.CodePhp',
+        'tualo solutions GmbH'
+    ) on duplicate key
+update
+    xtype_long_modern =
+values
+(xtype_long_modern),
+    xtype_long_classic =
+values
+(xtype_long_classic);
